@@ -1,0 +1,50 @@
+<!-- {{ registrationForm.value | json}} <br>   -->
+  <!-- {{ registrationForm.get('password').errors | json}} <br> -->
+  <!-- {{ registerUserData | json }} -->
+  <!-- <input type="text" [(ngModel)]="registerUserData.email" name="email" class="form-control rounded-0" required> -->
+  <!-- <input type="password" [(ngModel)]="registerUserData.password" name="password" class="form-control rounded-0"  required> -->
+  <!-- <button type="button" (click)="registerUser()" class="btn btn-primary float-right">Register</button> -->
+  <div class="py-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <span class="anchor" id="formLogin"></span>
+        <!-- form card login -->
+        <div class="card rounded-0">
+          <div class="card-header">
+            <h3 class="mb-0">Register</h3>
+          </div>
+          <div class="card-body">
+            <form class="form" [formGroup]="registrationForm" (ngSubmit)="registerUser()">
+              <div class="form-group">
+                <label for="uname1">Username</label>
+                <input formControlName="email" class="form-control rounded-0">
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" formControlName="password" class="form-control rounded-0">
+              </div>
+              <button class="btn btn-primary " [disabled]="!registrationForm.valid" type="submit">Register</button>
+            </form>
+            <!-- t {{ password.touched }} un  {{ password.untouched }}
+            pr {{ password.pristine }} d {{ password.dirty }} -->
+            <div *ngIf="password.dirty && registrationForm.invalid">
+              <small [ngClass]="password.errors?.needAtLeastOneSpecialChar?
+              'text-danger' : 'text-success'">
+              At least one special char:  {{ specialChars }} </small> <br>
+              <small [ngClass]="password.errors?.needAtLeastOneNumber?
+              'text-danger' : 'text-success'" >
+              Enter at least one number </small> <br>
+              <small [ngClass]="password.errors?.needAtLeastOneLetter?
+              'text-danger' : 'text-success'">
+              Enter at least one letter </small> <br>
+              <small class="text-danger" 
+              *ngIf="password.errors?.minlength">
+              Min {{ minPasswordLength }} charactes </small><br>
+            </div>
+          </div>
+          <!--/card-block-->
+        </div>
+        <!-- /form card login -->
+      </div>  
+    </div>
+  </div>
